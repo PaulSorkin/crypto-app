@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Card, Layout, Statistic, List, Typography, Spin, Tag} from "antd";
 import {ArrowDownOutlined, ArrowUpOutlined} from '@ant-design/icons';
 import {fakeFetchCrypto, fetchAssets} from "../../../api.js";
-import {percentDifference} from "../../../utils.js";
+import {capitalize, percentDifference} from "../../../utils.js";
 
 const siderStyle = {
     padding: '1rem',
@@ -46,7 +46,7 @@ function AppSider() {
             {assets.map(asset => (
                 <Card key={asset.id} style={{marginBottom: '1rem'}}>
                     <Statistic
-                        title={asset.id}
+                        title={capitalize(asset.id)}
                         value={asset.totalAmount}
                         precision={2}
                         valueStyle={{
