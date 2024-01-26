@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {Card, Layout, Statistic, List, Typography, Spin} from "antd";
 import {ArrowDownOutlined, ArrowUpOutlined} from '@ant-design/icons';
-import {fakeFetchCrypto, fetchAssets} from "../../api.js";
+import {fakeFetchCrypto, fetchAssets} from "../../../api.js";
+import {percentDifference} from "../../../utils.js";
 
 const data = [
     'Racing car sprays burning fuel into crowd.',
@@ -26,7 +27,16 @@ function AppSider(props) {
             const {result} = await fakeFetchCrypto()
             const assets = await fetchAssets()
 
-            setAssets(assets)
+            setAssets(assets.map((asset) => {
+                const coin = result.find((c) => c.id === asset.id)
+                return{
+                    grow: asset.price < coin.price,
+                    growPercent: percentDifference(asset.price, coin.price),
+                    totalAmount: asset.amount * coin.price,
+                    totalProfit: asset.amount * coin.price - asset.amount * asset.price,
+                    ...asset,
+                }
+            }))
             setCrypto(result)
             setLoading(false)
         }
