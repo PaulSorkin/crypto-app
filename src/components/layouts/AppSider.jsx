@@ -24,8 +24,8 @@ function AppSider() {
                 return {
                     grow: asset.price < coin.price,
                     growPercent: percentDifference(asset.price, coin.price),
-                    totalAmount: asset.amount,
-                    //totalAmount: asset.amount * coin.price,
+                    //totalAmount: asset.amount,
+                    totalAmount: asset.amount * coin.price,
                     totalProfit: asset.amount * coin.price - asset.amount * asset.price,
                     ...asset,
                 }
@@ -58,8 +58,7 @@ function AppSider() {
                         size='small'
                         dataSource={[
                             {title: 'Total Profit', value: asset.totalProfit, withTag: true},
-                            {title: 'Total Amount', value: asset.totalAmount, isPlain: true},
-                            // {title: 'Difference', value: asset.growPercent},
+                            {title: 'Total Amount', value: asset.amount, isPlain: true},
                         ]}
                         renderItem={(item) => (
                             <List.Item>
@@ -74,19 +73,6 @@ function AppSider() {
                     />
                 </Card>
             ))}
-
-            {/*<Card>*/}
-            {/*    <Statistic*/}
-            {/*        title="Idle"*/}
-            {/*        value={9.3}*/}
-            {/*        precision={2}*/}
-            {/*        valueStyle={{*/}
-            {/*            color: '#cf1322',*/}
-            {/*        }}*/}
-            {/*        prefix={<ArrowDownOutlined/>}*/}
-            {/*        suffix="%"*/}
-            {/*    />*/}
-            {/*</Card>*/}
         </Layout.Sider>
     );
 }
