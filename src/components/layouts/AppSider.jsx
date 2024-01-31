@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {Card, Layout, List, Spin, Statistic, Tag, Typography} from "antd";
+import {Card, Layout, List, Statistic, Tag, Typography} from "antd";
 import {ArrowDownOutlined, ArrowUpOutlined} from '@ant-design/icons';
 import {capitalize} from "../../../utils.js";
 import CryptoContext from "../../context/crypto-context.jsx";
@@ -9,11 +9,7 @@ const siderStyle = {
 };
 
 function AppSider() {
-const {loading, assets} = useContext(CryptoContext)
-
-    if (loading) {
-        return <Spin fullscreen/>
-    }
+const {assets} = useContext(CryptoContext)
 
     return (
         <Layout.Sider width="25%" style={siderStyle}>
