@@ -58,7 +58,7 @@ export default function AppHeader() {
             />
             <Button type="primary">Add Asset</Button>
             <Modal open={modal}
-                   onOk={() => setModal(false)}
+                   footer={null}
                    onCancel={() => setModal(false)}>
                 <p>Some contents...</p>
                 <p>Some contents...</p>
