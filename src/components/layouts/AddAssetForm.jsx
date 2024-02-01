@@ -14,7 +14,7 @@ const validateMessages = {
 };
 
 const AddAssetForm = ({onClose}) => {
-    const {crypto} = useCrypto()
+    const {crypto, addAsset} = useCrypto()
     const [coin, setCoin] = useState(null)
     const [submitted, setSubmited] = useState(false)
     const [form] = Form.useForm()
@@ -68,8 +68,8 @@ const AddAssetForm = ({onClose}) => {
             date: values.date?.$d ?? new Date(),
         }
         assetRef.current = newAsset
-        console.log(values)
         setSubmited(true)
+        addAsset(newAsset)
     }
 
     function handleAmountChange(value) {
