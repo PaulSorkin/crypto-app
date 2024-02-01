@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Button, DatePicker, Form, InputNumber, Select, Space} from "antd";
+import {Button, DatePicker, Form, InputNumber, Result, Select, Space} from "antd";
 import {useCrypto} from "../../context/crypto-context.jsx";
 import CoinHeader from "./CoinHeader.jsx";
 
@@ -13,10 +13,26 @@ const validateMessages = {
     }
 };
 
-const AddAssetForm = () => {
+const AddAssetForm = ({onClose}) => {
     const {crypto} = useCrypto()
     const [coin, setCoin] = useState(null)
+    const [submitted, setSubmited] = useState(false)
     const [form] = Form.useForm()
+
+    if(submitted) {
+        return (
+            <Result
+                status="success"
+                title="New Asset Has Been Added!"
+                subTitle={`Added ${44} of ${coin.name} by ${22} price`}
+                extra={[
+                    <Button type="primary" key="console" onClick={onClose}>
+                        Close
+                    </Button>,
+                ]}
+            />
+        )
+    }
 
     if (!coin) {
         return (
@@ -45,6 +61,7 @@ const AddAssetForm = () => {
 
     function onFinish(values) {
         console.log("finish", values)
+        setSubmited(true)
     }
 
     function handleAmountChange(value) {
