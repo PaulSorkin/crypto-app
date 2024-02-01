@@ -1,4 +1,5 @@
 import {Button, Layout, Select, Space} from "antd";
+import {useCrypto} from "../../context/crypto-context.jsx";
 
 const headerStyle = {
     width: '100%',
@@ -10,35 +11,36 @@ const headerStyle = {
     alignItems: 'center',
 };
 
-const options = [
-    {
-        label: 'China',
-        value: 'china',
-        emoji: '🇨🇳',
-        desc: 'China (中国)',
-    },
-    {
-        label: 'USA',
-        value: 'usa',
-        emoji: '🇺🇸',
-        desc: 'USA (美国)',
-    },
-    {
-        label: 'Japan',
-        value: 'japan',
-        emoji: '🇯🇵',
-        desc: 'Japan (日本)',
-    },
-    {
-        label: 'Korea',
-        value: 'korea',
-        emoji: '🇰🇷',
-        desc: 'Korea (韩国)',
-    },
-];
+// const options = [
+//     {
+//         label: 'China',
+//         value: 'china',
+//         emoji: '🇨🇳',
+//         desc: 'China (中国)',
+//     },
+//     {
+//         label: 'USA',
+//         value: 'usa',
+//         emoji: '🇺🇸',
+//         desc: 'USA (美国)',
+//     },
+//     {
+//         label: 'Japan',
+//         value: 'japan',
+//         emoji: '🇯🇵',
+//         desc: 'Japan (日本)',
+//     },
+//     {
+//         label: 'Korea',
+//         value: 'korea',
+//         emoji: '🇰🇷',
+//         desc: 'Korea (韩国)',
+//     },
+// ];
 
 
 export default function AppHeader() {
+    const {crypto} = useCrypto()
     return (
         <Layout.Header style={headerStyle}>
             <Select
@@ -47,10 +49,17 @@ export default function AppHeader() {
                 }}
                 value="press / to open"
                 optionLabelProp="label"
-                options={options}
+                options={crypto.map(coin => ({
+                    label: coin.name,
+                    value: coin.id,
+                    icon: coin.icon,
+                }))}
                 optionRender={(option) => (
                     <Space>
-                        <img/> Coin Name
+                        <img src={option.data.icon}
+                             alt={option.data.label}
+                             style={{width: 20}}/>
+                        {option.data.label}
                     </Space>
                 )}
             />
