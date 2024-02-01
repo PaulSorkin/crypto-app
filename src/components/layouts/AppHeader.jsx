@@ -1,5 +1,6 @@
-import {Button, Layout, Select, Space} from "antd";
+import {Button, Layout, Modal, Select, Space} from "antd";
 import {useCrypto} from "../../context/crypto-context.jsx";
+import {useEffect, useState} from "react";
 
 const headerStyle = {
     width: '100%',
@@ -11,44 +12,36 @@ const headerStyle = {
     alignItems: 'center',
 };
 
-// const options = [
-//     {
-//         label: 'China',
-//         value: 'china',
-//         emoji: '🇨🇳',
-//         desc: 'China (中国)',
-//     },
-//     {
-//         label: 'USA',
-//         value: 'usa',
-//         emoji: '🇺🇸',
-//         desc: 'USA (美国)',
-//     },
-//     {
-//         label: 'Japan',
-//         value: 'japan',
-//         emoji: '🇯🇵',
-//         desc: 'Japan (日本)',
-//     },
-//     {
-//         label: 'Korea',
-//         value: 'korea',
-//         emoji: '🇰🇷',
-//         desc: 'Korea (韩国)',
-//     },
-// ];
-
-
 export default function AppHeader() {
+    const [select, setSelect] = useState(false)
+    const [modal, setModal] = useState(false)
     const {crypto} = useCrypto()
+
+    useEffect(() => {
+        const keypress = (event) => {
+            if (event.key === '/') {
+                setSelect((prev) => !prev)
+            }
+        }
+        document.addEventListener('keypress', keypress)
+        return () => document.removeEventListener('keypress', keypress)
+    }, [])
+
+    function handeSelect(value) {
+        console.log(value)
+        setModal(true)
+    }
+
     return (
         <Layout.Header style={headerStyle}>
             <Select
+                open={select}
+                onSelect={handeSelect}
+                onClick={() => setSelect((prev) => !prev)}
                 style={{
                     width: 250,
                 }}
                 value="press / to open"
-                optionLabelProp="label"
                 options={crypto.map(coin => ({
                     label: coin.name,
                     value: coin.id,
@@ -64,6 +57,13 @@ export default function AppHeader() {
                 )}
             />
             <Button type="primary">Add Asset</Button>
+            <Modal open={modal}
+                   onOk={() => setModal(false)}
+                   onCancel={() => setModal(false)}>
+                <p>Some contents...</p>
+                <p>Some contents...</p>
+                <p>Some contents...</p>
+            </Modal>
         </Layout.Header>
     )
 }
