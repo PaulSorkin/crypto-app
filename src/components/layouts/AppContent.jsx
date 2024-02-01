@@ -25,10 +25,12 @@ function AppContent() {
     return (
         <Layout.Content style={contentStyle}>
             <Typography.Title level={3} style={{textAlign: 'left', color: '#fff'}}>
-                Portfolio: {portfolioValue} $
+                Portfolio Total: {portfolioValue} $
             </Typography.Title>
-            <PortfolioChart />
-            <AssetsTable />
+            <div style={{display: 'flex', gap: '10rem', justifyContent: 'center', alignItems: 'center'}}>
+                <PortfolioChart />
+                <AssetsTable />
+            </div>
         </Layout.Content>
     );
 }
