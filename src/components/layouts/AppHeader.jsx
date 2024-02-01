@@ -2,6 +2,7 @@ import {Button, Drawer, Layout, Modal, Select, Space} from "antd";
 import {useCrypto} from "../../context/crypto-context.jsx";
 import {useEffect, useState} from "react";
 import CoinInfoModal from "./CoinInfoModal.jsx";
+import AddAssetForm from "./AddAssetForm.jsx";
 
 const headerStyle = {
     width: '100%',
@@ -65,10 +66,12 @@ export default function AppHeader() {
                    onCancel={() => setModal(false)}>
                 <CoinInfoModal coin={coin}/>
             </Modal>
-            <Drawer title="Add Asset" onClose={() => setDrawer(false)} open={drawer}>
-                <p>Some contents...</p>
-                <p>Some contents...</p>
-                <p>Some contents...</p>
+            <Drawer
+                width={600}
+                title="Add Asset"
+                onClose={() => setDrawer(false)}
+                open={drawer}>
+                <AddAssetForm />
             </Drawer>
         </Layout.Header>
     )
