@@ -1,6 +1,8 @@
 import React from 'react';
 import {Layout, Typography} from "antd";
 import {useCrypto} from "../../context/crypto-context.jsx";
+import PortfolioChart from "./PortfolioChart.jsx";
+import AssetsTable from "./AssetsTable.jsx";
 
 const contentStyle = {
     textAlign: 'center',
@@ -25,6 +27,8 @@ function AppContent() {
             <Typography.Title level={3} style={{textAlign: 'left', color: '#fff'}}>
                 Portfolio: {portfolioValue} $
             </Typography.Title>
+            <PortfolioChart />
+            <AssetsTable />
         </Layout.Content>
     );
 }
