@@ -1,5 +1,6 @@
 import React from 'react';
 import {Divider, Flex, Tag, Typography} from "antd";
+import {RedditCircleFilled, TwitterCircleFilled} from "@ant-design/icons";
 
 const CoinInfoModal = ({coin}) => {
     return (
@@ -29,11 +30,18 @@ const CoinInfoModal = ({coin}) => {
             </Typography.Paragraph>
             <Typography.Paragraph>
                 <Typography.Text strong >Market Capitalization: </Typography.Text>
-                {coin.marketCap}$
+                {coin.marketCap.toFixed(2)}$
             </Typography.Paragraph>
-            <Typography.Paragraph>
+            {coin.contractAddress && <Typography.Paragraph>
                 <Typography.Text strong >Contract Adress: </Typography.Text>
                 {coin.contractAddress}
+            </Typography.Paragraph>}
+            <Typography.Paragraph>
+                <Flex align={"center"} gap={30}>
+                    <Typography.Link strong href={coin.websiteUrl} target={"_blank"} >Visit Web Site</Typography.Link>
+                    <a href={coin.twitterUrl} target={"_blank"}><TwitterCircleFilled style={{fontSize: 30, color: 'blue'}}/></a>
+                    <a href={coin.redditUrl} target={"_blank"}><RedditCircleFilled style={{fontSize: 30, color: 'orange'}} /></a>
+                </Flex>
             </Typography.Paragraph>
         </>
     )
